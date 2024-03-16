@@ -2,7 +2,7 @@ version: "3.8"
 services:
   api_gateway_app:
     build: .
-    image: elleined/api_gateway
+    image: elleined/api-gateway
     container_name: api_gateway_app
     restart: always
     ports:
