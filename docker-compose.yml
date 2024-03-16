@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  api_gateway_app:
+    build: .
+    image: elleined/api_gateway
+    container_name: api_gateway_app
+    restart: always
+    ports:
+      - "8765:8765"
+    networks:
+      - api_gateway_network
+networks:
+  api_gateway_network:
+    name: api_gateway_network
+    external: false
+    ipam:
+      driver: default
