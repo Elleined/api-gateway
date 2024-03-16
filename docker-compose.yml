@@ -9,6 +9,19 @@ services:
       - "8765:8765"
     networks:
       - api_gateway_network
+    depends_on:
+      api_discovery_server:
+        condition: service_healthy
+  api_discovery_server:
+    image: elleined/api-discovery-server
+    container_name: api_discovery_server
+    restart: always
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: curl http://localhost:8761
+    networks:
+      - api_gateway_network
 networks:
   api_gateway_network:
     name: api_gateway_network
