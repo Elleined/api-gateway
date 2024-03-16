@@ -1,5 +1,5 @@
-# api-gateway
-Creating API gateway for microservices
+# api-gateway 
+API gateway for microservices
 
 # What is API Gateway
   - API gateway is used to serve as a entry point in your microservices we dont want users to access our microservices individually right?.
