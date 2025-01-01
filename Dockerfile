@@ -1,6 +1,10 @@
-FROM openjdk:17-alpine
-MAINTAINER Elleined
+FROM jelastic/maven:3.9.5-openjdk-21 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean install -DskipTests
 
-ADD ./target/*.jar api-gateway.jar
-EXPOSE 8765
+FROM alpine/java:21-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar .
 CMD ["java", "-jar", "api-gateway.jar"]
