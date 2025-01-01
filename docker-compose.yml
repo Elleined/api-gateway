@@ -1,20 +1,20 @@
 version: "3.8"
 services:
   api_gateway:
-    image: elleined/api-gateway
+    image: elleined/api-gateway:latest
     container_name: api_gateway
-    ports:
-      - "8765:8765"
+    env_file:
+      - api_gateway.env
     networks:
       - api_gateway_network
     depends_on:
       api_discovery_server:
         condition: service_healthy
   api_discovery_server:
-    image: elleined/api-discovery-server
+    image: elleined/api-discovery-server:latest
     container_name: api_discovery_server
-    ports:
-      - "8761:8761"
+    env_file:
+      - api_discovery_server.env
     networks:
       - api_gateway_network
     healthcheck:
