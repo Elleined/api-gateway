@@ -1,10 +1,8 @@
 version: "3.8"
 services:
-  api_gateway_app:
-    build: .
+  api_gateway:
     image: elleined/api-gateway
-    container_name: api_gateway_app
-    restart: always
+    container_name: api_gateway
     ports:
       - "8765:8765"
     networks:
@@ -15,13 +13,16 @@ services:
   api_discovery_server:
     image: elleined/api-discovery-server
     container_name: api_discovery_server
-    restart: always
     ports:
       - "8761:8761"
     networks:
       - api_gateway_network
     healthcheck:
       test: curl http://localhost:8761/actuator/health
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 120s
 networks:
   api_gateway_network:
     name: api_gateway_network
