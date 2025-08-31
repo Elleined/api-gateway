@@ -5,23 +5,23 @@ services:
     restart: always
     environment:
       - TZ=Asia/Manila
-      - PORT=${PORT}
+      - PORT=${DISCOVERY_SERVER_PORT}
       - LOG_LEVEL=${LOG_LEVEL}
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
     ports:
-      - "${PORT}:${PORT}"
+      - "${DISCOVERY_SERVER_PORT}:${DISCOVERY_SERVER_PORT}"
     networks:
-      - prod-discovery-server-network
+      - dev-api-gateway-network
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "http://${CONTAINER_NAME}:${PORT}/actuator/health" ]
+      test: [ "CMD", "wget", "--spider", "http://${CONTAINER_NAME}:${DISCOVERY_SERVER_PORT}/actuator/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
 
 networks:
-  api_gateway_network:
-    name: api_gateway_network
+  dev-api-gateway-network:
+    name: ${NETWORK_NAME}
     external: false
     ipam:
       driver: default
