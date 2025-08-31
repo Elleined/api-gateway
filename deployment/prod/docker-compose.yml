@@ -1,6 +1,6 @@
 services:
   prod-api-gateway:
-    image: elleined/api-gatewat:${IMAGE_TAG}
+    image: elleined/api-gateway:${IMAGE_TAG}
     container_name: ${CONTAINER_NAME}
     restart: always
     environment:
