@@ -13,6 +13,9 @@ services:
       - "${PORT}:${PORT}"
     networks:
       - prod-api-gateway-network
+    depends_on:
+      prod-api-discovery-server:
+        condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--spider", "http://${CONTAINER_NAME}:${PORT}/actuator/health" ]
       interval: 30s
