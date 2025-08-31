@@ -1,5 +1,5 @@
 services:
-  api-discovery-server:
+  dev-api-discovery-server:
     image: elleined/api-discovery-server:${IMAGE_TAG}
     container_name: ${CONTAINER_NAME}
     restart: always
